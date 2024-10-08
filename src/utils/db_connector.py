@@ -103,7 +103,7 @@ class DatabaseConnector:
                     data_dict = data.to_dict("records")
 
                     client = MongoClient(
-                        "mongodb://{}:{}@{}:{}/{}?authSource=admin".format(
+                        "mongodb://{}:{}@{}:{}/{}?authSource=admin&tls=true&tlsAllowInvalidCertificates=true".format(
                             self.connection_info["username"],
                             self.connection_info["password"],
                             self.connection_info["host"],
@@ -224,6 +224,7 @@ class DatabaseConnector:
             + ":"
             + self.connection_info["port"]
             + "/?authSource=admin"
+            + "&tls=true&tlsAllowInvalidCertificates=true"
         )
         self.client = MongoClient(
             connection_str, serverSelectionTimeoutMS=MAX_SERVER_SEL_DELAY
